@@ -7,21 +7,21 @@
   {
     "id": "e88a2a08-4f27-4bf2-82b9-d47f6ed65256",
     "name": "Switch Sports",
-    "imageUrl": "e88a2a08-4f27-4bf2-82b9-d47f6ed65256/images/.jpg"
+    "imageUrl": "/images/e88a2a08-4f27-4bf2-82b9-d47f6ed65256.jpg"
   },
   {
     "id": "086f4a81-71b1-43e1-950d-76c4d9c633cd",
     "name": "Trivial Pursuit Live!",
-    "imageUrl": "086f4a81-71b1-43e1-950d-76c4d9c633cd/images/.jpg"
+    "imageUrl": "/images/086f4a81-71b1-43e1-950d-76c4d9c633cd.jpg"
   },
   {
     "id": "ebefaeb6-9749-467e-89ea-bbe1d4829141",
     "name": "Mario Kart 8 Deluxe",
-    "imageUrl": "ebefaeb6-9749-467e-89ea-bbe1d4829141/images/.jpg"
+    "imageUrl": "/images/ebefaeb6-9749-467e-89ea-bbe1d4829141.jpg"
   },
   {
     "id": "d56694c6-2e07-44d9-868b-1fd6bb1150da",
     "name": "Rocket League",
-    "imageUrl": "d56694c6-2e07-44d9-868b-1fd6bb1150da/images/.jpg"
+    "imageUrl": "/images/d56694c6-2e07-44d9-868b-1fd6bb1150da.jpg"
   }
 ]

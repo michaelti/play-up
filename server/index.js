@@ -10,9 +10,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/players", playerRoutes);
-app.use("/match-results",  matchResultRoutes);
+app.use("/images", express.static("./images"));
 
+app.use("/players", playerRoutes);
+app.use("/match-results", matchResultRoutes);
 app.use("/games", gameRoutes);
 
 app.listen(PORT, () => {
