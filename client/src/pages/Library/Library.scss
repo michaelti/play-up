@@ -1,10 +1,19 @@
 @use "../../styles/colors" as *;
+@use "../../styles/responsive" as *;
 
 .library-page {
-  &__title {
-    text-align: center;
-    background-color: $primary;
-    margin: 0;
-    padding: 0.5rem;
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
   }
 }

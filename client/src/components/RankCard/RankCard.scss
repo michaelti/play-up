@@ -1,0 +1,30 @@
+@use "../../styles/colors" as *;
+
+.rank-card {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 1rem 0;
+  gap: 1rem;
+
+  &__title {
+    margin: 0;
+    font-size: 1rem;
+    font-family: Viga;
+  }
+
+  &__icon {
+    display: block;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: 2px solid $accent;
+    padding: 0.125rem;
+    background-color: $background;
+  }
+
+  &__points {
+    text-align: right;
+  }
+}
