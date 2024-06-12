@@ -1,4 +1,5 @@
 import fs from "fs";
+import crypto from "crypto";
 
 const retrieveAllGames = () => {
   const gamesJson = fs.readFileSync("./data/games.json");
@@ -10,4 +11,11 @@ const retrieveSingleGame = (id) => {
   return games.find((game) => game.id === id);
 };
 
-export { retrieveAllGames, retrieveSingleGame };
+const saveNewGame = (game) => {
+  const games = retrieveAllGames();
+  games.push({ id: crypto.randomUUID(), ...game });
+  fs.writeFileSync("./data/games.json", JSON.stringify(games));
+  return game;
+};
+
+export { retrieveAllGames, retrieveSingleGame, saveNewGame };

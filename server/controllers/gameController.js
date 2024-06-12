@@ -1,11 +1,16 @@
-import { retrieveAllGames, retrieveSingleGame } from "../models/Game.js";
+import crypto from "crypto";
+import {
+  retrieveAllGames,
+  retrieveSingleGame,
+  saveNewGame,
+} from "../models/Game.js";
 
 const getAllGames = (_req, res) => {
   try {
     const games = retrieveAllGames();
     res.json(games);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: `Error: ${error.message}` });
   }
 };
 
@@ -20,4 +25,15 @@ const getSingleGame = (req, res) => {
   }
 };
 
-export { getAllGames, getSingleGame };
+const addNewGame = (req, res) => {
+  const game = req.body;
+
+  try {
+    const newGame = saveNewGame(game);
+    res.json(newGame);
+  } catch (error) {
+    res.status(500).json({ error: `Error: ${error.message}` });
+  }
+};
+
+export { getAllGames, getSingleGame, addNewGame };
