@@ -6,8 +6,7 @@ import { useState } from "react";
 
 export default function NewMatchForm({ game }) {
   const [players, loading, error] = useAxios(`/players`);
-  const [newMatch, newMatchLoading, newMatchError, postMatchFn] =
-    useAxiosPost(`/match-results`);
+  const [newMatch, newMatchLoading, newMatchError, postMatchFn] = useAxiosPost(`/match-results`);
   const [selectedOption, setSelectedOption] = useState(null);
 
   if (loading) {
