@@ -13,7 +13,7 @@ const retrieveSingleGame = (id) => {
 
 const saveNewGame = (game) => {
   const games = retrieveAllGames();
-  games.push({ id: crypto.randomBytes(16).toString("hex"), ...game });
+  games.push({ id: crypto.randomUUID(), ...game });
   fs.writeFileSync("./data/games.json", JSON.stringify(games));
   return game;
 };
