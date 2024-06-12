@@ -1,30 +1,34 @@
 @use "../../styles/colors" as *;
 
-.rank-card {
+.match-card {
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  align-items: center;
   padding: 1rem 0;
   gap: 1rem;
 
-  &__title {
-    margin: 0;
-    font-size: 1rem;
-    font-family: Viga;
+  &__time {
+    text-align: right;
   }
 
-  &__icon {
+  &__players {
+    display: flex;
+  }
+
+  &__player-icon {
     display: block;
-    height: 3rem;
     width: 3rem;
+    height: 3rem;
     border-radius: 50%;
+    margin-right: -0.25rem;
     border: 2px solid $accent;
     padding: 0.125rem;
     background-color: $background;
-  }
 
-  &__points {
-    text-align: right;
+    &--winner {
+      border-color: $primary;
+      transform: scale(1.25);
+    }
   }
 }
