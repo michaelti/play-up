@@ -1,9 +1,10 @@
 import useAxios from "../../hooks/useAxios";
-import useAxiosPost from "../../hooks/useAxiosPost";
+import "./Library.scss";
+import GameCard from "../../components/GameCard/GameCard";
 
 export default function Library() {
-  const [data, loading, error] = useAxios("/games");
-  const [postData, postLoading, postError, postDataFn] = useAxiosPost("/games");
+  const [games, loading, error] = useAxios("/games");
+  console.log(games);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -14,18 +15,15 @@ export default function Library() {
   }
 
   return (
-    <div>
-      Library
-      <button
-        onClick={() =>
-          postDataFn({
-            name: "Test",
-            imageUrl: "/images/8eb517e8-dcb2-4464-8e9d-9be6050abf6a.jpg",
-          })
-        }
-      >
-        Upload
-      </button>
-    </div>
+    <main className="library-page">
+      <h1 className="library-page__title">PlayUp</h1>
+      {games.map((game) => (
+        <GameCard
+          key={game.id}
+          title={game.name}
+          img={import.meta.env.VITE_BACKEND_URL + game.imageUrl}
+        />
+      ))}
+    </main>
   );
 }
