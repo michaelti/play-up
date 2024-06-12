@@ -1,0 +1,34 @@
+@use "../../styles/colors" as *;
+
+.nav {
+  background-color: $primary;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  &__title-link {
+    text-decoration: none;
+    color: $text;
+  }
+
+  &__links {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__link {
+    color: $text;
+    text-decoration: none;
+  }
+
+  &__link.active {
+    text-decoration: underline;
+  }
+}
