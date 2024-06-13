@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function NewMatchForm({ game }) {
   const [players, loading, error] = useAxios(`/players`);
-  const [newMatch, newMatchLoading, newMatchError, postMatchFn] =
-    useAxiosPost(`/match-results`);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [_newMatch, _newMatchLoading, _newMatchError, postMatchFn] = useAxiosPost(`/match-results`);
+  const [selectedPlayers, setSelectedPlayers] = useState(null);
+  const [selectedWinner, setSelectedWinner] = useState(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ export default function NewMatchForm({ game }) {
     return <div>Error: {error.message}</div>;
   }
 
-  const selectOptions = players.map((player) => ({
+  const playersList = players.map((player) => ({
     value: player.id,
     label: player.name,
   }));
@@ -29,13 +30,19 @@ export default function NewMatchForm({ game }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const playerIds = selectedPlayers.map((winner) => winner.value);
+
     postMatchFn({
       gameId: game.id,
-      playerIds: [selectedOption[0].value, selectedOption[1].value],
-      winnerPlayerId: selectedOption[0].value,
+      playerIds,
+      winnerPlayerId: selectedWinner.value,
     });
 
-    navigate("/recent");
+    setFormSubmitted(true);
+
+    setTimeout(() => {
+      navigate("/recent");
+    }, 1000);
   };
 
   return (
@@ -46,15 +53,21 @@ export default function NewMatchForm({ game }) {
         alt={game.name}
         className="form__img"
       />
-      <p>Players:</p>
+      <p>Who was playing?</p>
+      <Select
+        value={selectedPlayers}
+        isMulti
+        onChange={(selectedPlayers) => setSelectedPlayers(selectedPlayers)}
+        options={playersList}
+      />
       <p>Who won?</p>
       <Select
-        value={selectedOption}
-        isMulti
-        onChange={(selectedOption) => setSelectedOption(selectedOption)}
-        options={selectOptions}
+        value={selectedWinner}
+        onChange={(selectedWinner) => setSelectedWinner(selectedWinner)}
+        options={playersList}
       />
-      <button>Save Match Details</button>
+      <button className="form__btn">Save Match Details</button>
+      {formSubmitted && <p className="form__success">Saved! Redirecting to Recent page...</p>}
     </form>
   );
 }

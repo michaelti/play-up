@@ -19,6 +19,7 @@ export default function MatchCard({
       <span className="match-card__players">
         {matchPlayers.map((player) => (
           <img
+            key={player.id}
             src={import.meta.env.VITE_BACKEND_URL + player.imageUrl}
             alt={player.name}
             className={`match-card__player-icon ${

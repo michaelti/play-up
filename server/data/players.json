@@ -1,1 +1,44 @@
-[{"id":"876d9d75-c7a7-488c-ad52-665e1ff72c02","name":"Joe","points":0,"imageUrl":"/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg"},{"id":"23a2111d-a516-4d3d-9173-9799a47ae336","name":"Sammy","points":0,"imageUrl":"/images/23a2111d-a516-4d3d-9173-9799a47ae336.jpg"},{"id":"a43f1982-654b-4486-b110-50e3334042b1","name":"Michael","points":0,"imageUrl":"/images/a43f1982-654b-4486-b110-50e3334042b1.jpg"},{"id":"259e279d-a1c5-4ef3-ae3e-38a107171d75","name":"Temi","points":0,"imageUrl":"/images/259e279d-a1c5-4ef3-ae3e-38a107171d75.jpg"},{"id":"87ffbeb1-cb6e-4482-aaea-45d9aa128184","name":"Stephanie","points":0,"imageUrl":"/images/87ffbeb1-cb6e-4482-aaea-45d9aa128184.jpg"},{"id":"dfe20862-7eb3-49f4-8da6-3d27abfb343c","name":"Mohamed","points":0,"imageUrl":"/images/dfe20862-7eb3-49f4-8da6-3d27abfb343c.jpg"},{"id":"f7c3e8ca-96ad-4e40-a0dd-cb68904c249c","name":"Daniel","points":0,"imageUrl":"/images/f7c3e8ca-96ad-4e40-a0dd-cb68904c249c.jpg"},{"id":"73d4d830-1a63-47e1-8aa0-79b3d88c9290","name":"Test","points":0,"imageUrl":"/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg"}]
+[
+  {
+    "id": "876d9d75-c7a7-488c-ad52-665e1ff72c02",
+    "name": "Joe",
+    "points": 0,
+    "imageUrl": "/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg"
+  },
+  {
+    "id": "23a2111d-a516-4d3d-9173-9799a47ae336",
+    "name": "Sammy",
+    "points": 0,
+    "imageUrl": "/images/23a2111d-a516-4d3d-9173-9799a47ae336.jpg"
+  },
+  {
+    "id": "a43f1982-654b-4486-b110-50e3334042b1",
+    "name": "Michael",
+    "points": 0,
+    "imageUrl": "/images/a43f1982-654b-4486-b110-50e3334042b1.jpg"
+  },
+  {
+    "id": "259e279d-a1c5-4ef3-ae3e-38a107171d75",
+    "name": "Temi",
+    "points": 0,
+    "imageUrl": "/images/259e279d-a1c5-4ef3-ae3e-38a107171d75.jpg"
+  },
+  {
+    "id": "87ffbeb1-cb6e-4482-aaea-45d9aa128184",
+    "name": "Stephanie",
+    "points": 0,
+    "imageUrl": "/images/87ffbeb1-cb6e-4482-aaea-45d9aa128184.jpg"
+  },
+  {
+    "id": "dfe20862-7eb3-49f4-8da6-3d27abfb343c",
+    "name": "Mohamed",
+    "points": 0,
+    "imageUrl": "/images/dfe20862-7eb3-49f4-8da6-3d27abfb343c.jpg"
+  },
+  {
+    "id": "f7c3e8ca-96ad-4e40-a0dd-cb68904c249c",
+    "name": "Daniel",
+    "points": 0,
+    "imageUrl": "/images/f7c3e8ca-96ad-4e40-a0dd-cb68904c249c.jpg"
+  }
+]
