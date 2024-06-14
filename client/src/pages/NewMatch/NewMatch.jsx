@@ -17,7 +17,7 @@ export default function NewMatch() {
 
   return (
     <section className="new-match">
-      <h1>New Match</h1>
+      <h1 className="new-match__title">Record a Match</h1>
       <NewMatchForm game={game} />
     </section>
   );
