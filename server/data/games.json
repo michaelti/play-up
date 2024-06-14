@@ -1,0 +1,27 @@
+[
+  {
+    "id": "8eb517e8-dcb2-4464-8e9d-9be6050abf6a",
+    "name": "Super Smash Bros. Ultimate",
+    "imageUrl": "/images/8eb517e8-dcb2-4464-8e9d-9be6050abf6a.jpg"
+  },
+  {
+    "id": "e88a2a08-4f27-4bf2-82b9-d47f6ed65256",
+    "name": "Switch Sports",
+    "imageUrl": "/images/e88a2a08-4f27-4bf2-82b9-d47f6ed65256.jpg"
+  },
+  {
+    "id": "086f4a81-71b1-43e1-950d-76c4d9c633cd",
+    "name": "Trivial Pursuit Live!",
+    "imageUrl": "/images/086f4a81-71b1-43e1-950d-76c4d9c633cd.jpg"
+  },
+  {
+    "id": "ebefaeb6-9749-467e-89ea-bbe1d4829141",
+    "name": "Mario Kart 8 Deluxe",
+    "imageUrl": "/images/ebefaeb6-9749-467e-89ea-bbe1d4829141.jpg"
+  },
+  {
+    "id": "d56694c6-2e07-44d9-868b-1fd6bb1150da",
+    "name": "Rocket League",
+    "imageUrl": "/images/d56694c6-2e07-44d9-868b-1fd6bb1150da.jpg"
+  }
+]

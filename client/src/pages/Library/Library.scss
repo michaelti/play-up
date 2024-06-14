@@ -1,0 +1,19 @@
+@use "../../styles/colors" as *;
+@use "../../styles/responsive" as *;
+
+.library-page {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+}

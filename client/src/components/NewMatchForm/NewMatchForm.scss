@@ -1,0 +1,18 @@
+@use "../../styles/colors" as *;
+
+.form {
+  &__img {
+    width: 10rem;
+  }
+
+  &__btn {
+    background-color: $primary;
+    border: none;
+    padding: 1rem;
+    margin-top: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
