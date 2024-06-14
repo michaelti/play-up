@@ -1,5 +1,6 @@
 import fs from "fs";
 import crypto from "crypto";
+import { increasePlayerPoints } from "./Player.js";
 
 const retrieveAllMatchResults = () => {
   const matchResultsJson = fs.readFileSync("./data/match-results.json");
@@ -18,7 +19,13 @@ const saveNewMatchResult = (matchResult) => {
     timestamp: Date.now(),
     ...matchResult,
   });
-  console.log(matchResults);
+
+  for (const playerId of matchResult.playerIds) {
+    increasePlayerPoints(playerId, 50);
+  }
+
+  increasePlayerPoints(matchResult.winnerPlayerId, 50);
+
   fs.writeFileSync("./data/match-results.json", JSON.stringify(matchResults));
   return matchResult;
 };

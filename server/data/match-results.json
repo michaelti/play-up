@@ -1,12 +1,1 @@
-[
-  {
-    "id": "2e6ebea7-861b-49d2-b94f-ce127fa62814",
-    "gameId": "8eb517e8-dcb2-4464-8e9d-9be6050abf6a",
-    "playerIds": [
-      "a43f1982-654b-4486-b110-50e3334042b1",
-      "23a2111d-a516-4d3d-9173-9799a47ae336"
-    ],
-    "winnerPlayerId": "a43f1982-654b-4486-b110-50e3334042b1",
-    "timestamp": 1718189629533
-  }
-]
+[{"id":"2e6ebea7-861b-49d2-b94f-ce127fa62814","gameId":"8eb517e8-dcb2-4464-8e9d-9be6050abf6a","playerIds":["a43f1982-654b-4486-b110-50e3334042b1","23a2111d-a516-4d3d-9173-9799a47ae336"],"winnerPlayerId":"a43f1982-654b-4486-b110-50e3334042b1","timestamp":1718189629533},{"id":"558145f7-4cea-41ac-8dc6-4659a4eade26","timestamp":1718360769442,"gameId":"e88a2a08-4f27-4bf2-82b9-d47f6ed65256","playerIds":["a43f1982-654b-4486-b110-50e3334042b1","23a2111d-a516-4d3d-9173-9799a47ae336"],"winnerPlayerId":"dfe20862-7eb3-49f4-8da6-3d27abfb343c"},{"id":"3d94dcbd-18ce-48f8-81f6-ee952c1bcd77","timestamp":1718360915123,"gameId":"e88a2a08-4f27-4bf2-82b9-d47f6ed65256","playerIds":["23a2111d-a516-4d3d-9173-9799a47ae336","87ffbeb1-cb6e-4482-aaea-45d9aa128184"],"winnerPlayerId":"87ffbeb1-cb6e-4482-aaea-45d9aa128184"},{"id":"ca69dd73-cfaf-4d15-b7bb-0e3aade04e4e","timestamp":1718361310859,"gameId":"8eb517e8-dcb2-4464-8e9d-9be6050abf6a","playerIds":["876d9d75-c7a7-488c-ad52-665e1ff72c02","23a2111d-a516-4d3d-9173-9799a47ae336"],"winnerPlayerId":"876d9d75-c7a7-488c-ad52-665e1ff72c02"},{"id":"8ce18823-0302-4a0c-954d-f396de2129a8","timestamp":1718361365115,"gameId":"8eb517e8-dcb2-4464-8e9d-9be6050abf6a","playerIds":["a43f1982-654b-4486-b110-50e3334042b1","259e279d-a1c5-4ef3-ae3e-38a107171d75","87ffbeb1-cb6e-4482-aaea-45d9aa128184"],"winnerPlayerId":"87ffbeb1-cb6e-4482-aaea-45d9aa128184"},{"id":"27b9ac22-0190-4b30-ae40-84e8f1c12587","timestamp":1718361474813,"gameId":"8eb517e8-dcb2-4464-8e9d-9be6050abf6a","playerIds":["a43f1982-654b-4486-b110-50e3334042b1","259e279d-a1c5-4ef3-ae3e-38a107171d75","87ffbeb1-cb6e-4482-aaea-45d9aa128184"],"winnerPlayerId":"87ffbeb1-cb6e-4482-aaea-45d9aa128184"},{"id":"155bb4d8-4538-4cd0-a7bc-2182a9e93f7b","timestamp":1718361533187,"gameId":"8eb517e8-dcb2-4464-8e9d-9be6050abf6a","playerIds":["f7c3e8ca-96ad-4e40-a0dd-cb68904c249c","dfe20862-7eb3-49f4-8da6-3d27abfb343c","87ffbeb1-cb6e-4482-aaea-45d9aa128184"],"winnerPlayerId":"87ffbeb1-cb6e-4482-aaea-45d9aa128184"}]
