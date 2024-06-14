@@ -20,11 +20,14 @@ const saveNewMatchResult = (matchResult) => {
     ...matchResult,
   });
 
+  const pointsForParticipation = 50;
+  const pointsForWin = 50;
+
   for (const playerId of matchResult.playerIds) {
-    increasePlayerPoints(playerId, 50);
+    increasePlayerPoints(playerId, pointsForParticipation);
   }
 
-  increasePlayerPoints(matchResult.winnerPlayerId, 50);
+  increasePlayerPoints(matchResult.winnerPlayerId, pointsForWin);
 
   fs.writeFileSync("./data/match-results.json", JSON.stringify(matchResults));
   return matchResult;
