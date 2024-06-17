@@ -18,4 +18,17 @@ const saveNewPlayer = (player) => {
   return player;
 };
 
-export { retrieveAllPlayers, retrieveSinglePlayer, saveNewPlayer };
+const increasePlayerPoints = (id, points) => {
+  const players = retrieveAllPlayers();
+  const playerIndex = players.findIndex((player) => player.id === id);
+  players[playerIndex].points += points;
+  fs.writeFileSync("./data/players.json", JSON.stringify(players));
+  return players[playerIndex].points;
+};
+
+export {
+  retrieveAllPlayers,
+  retrieveSinglePlayer,
+  saveNewPlayer,
+  increasePlayerPoints,
+};
