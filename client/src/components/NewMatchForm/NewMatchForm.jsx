@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function NewMatchForm({ game }) {
   const [players, loading, error] = useAxios(`/players`);
-  const [_newMatch, _newMatchLoading, _newMatchError, postMatchFn] = useAxiosPost(`/match-results`);
+  const [_newMatch, _newMatchLoading, _newMatchError, postMatchFn] =
+    useAxiosPost(`/match-results`);
   const [selectedPlayers, setSelectedPlayers] = useState(null);
   const [selectedWinner, setSelectedWinner] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -66,8 +67,12 @@ export default function NewMatchForm({ game }) {
         onChange={(selectedWinner) => setSelectedWinner(selectedWinner)}
         options={playersList}
       />
-      <button className="form__btn">Save Match Details</button>
-      {formSubmitted && <p className="form__success">Saved! Redirecting to Recent page...</p>}
+      <button disabled={formSubmitted} className="form__btn">
+        Save Match Details
+      </button>
+      {formSubmitted && (
+        <p className="form__success">Saved! Redirecting to Recent page...</p>
+      )}
     </form>
   );
 }
