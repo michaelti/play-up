@@ -16,18 +16,20 @@ export default function Library() {
 
   return (
     <main className="library-page">
-      <section className="library-page__grid">
-        {games.map((game) => (
-          <GameCard
-            key={game.id}
-            id={game.id}
-            title={game.name}
-            img={import.meta.env.VITE_BACKEND_URL + game.imageUrl}
-          />
-        ))}
+      <div className="library-page__container">
+        <section className="library-page__grid">
+          {games.map((game) => (
+            <GameCard
+              key={game.id}
+              id={game.id}
+              title={game.name}
+              img={import.meta.env.VITE_BACKEND_URL + game.imageUrl}
+            />
+          ))}
 
-        <GameCard id="" title="Add a game" img={plusIcon} />
-      </section>
+          <GameCard id="" title="Add a game" img={plusIcon} />
+        </section>
+      </div>
     </main>
   );
 }

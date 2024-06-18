@@ -1,4 +1,10 @@
+@use "../../styles/mixins" as *;
+
 .rankings-page {
+  &__container {
+    @include centralise-content;
+  }
+
   &__list {
     padding: 1rem;
     display: grid;

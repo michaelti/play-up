@@ -15,18 +15,20 @@ export default function Rankings() {
 
   return (
     <main className="rankings-page">
-      <section className="rankings-page__list">
-        {players
-          .sort((a, b) => b.points - a.points)
-          .map((player) => (
-            <RankCard
-              key={player.id}
-              icon={import.meta.env.VITE_BACKEND_URL + player.imageUrl}
-              name={player.name}
-              points={player.points}
-            />
-          ))}
-      </section>
+      <div className="rankings-page__container">
+        <section className="rankings-page__list">
+          {players
+            .sort((a, b) => b.points - a.points)
+            .map((player) => (
+              <RankCard
+                key={player.id}
+                icon={import.meta.env.VITE_BACKEND_URL + player.imageUrl}
+                name={player.name}
+                points={player.points}
+              />
+            ))}
+        </section>
+      </div>
     </main>
   );
 }
