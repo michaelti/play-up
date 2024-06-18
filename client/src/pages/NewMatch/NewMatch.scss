@@ -1,5 +1,11 @@
+@use "../../styles/mixins" as *;
+
 .new-match {
   padding: 1rem;
+
+  &__container {
+    @include centralise-content;
+  }
   
   &__title {
     text-align: center;

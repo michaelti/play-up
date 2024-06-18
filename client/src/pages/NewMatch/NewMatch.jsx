@@ -17,8 +17,10 @@ export default function NewMatch() {
 
   return (
     <section className="new-match">
-      <h1 className="new-match__title">Record a Match</h1>
-      <NewMatchForm game={game} />
+      <div className="new-match__container">
+        <h1 className="new-match__title">Record a Match</h1>
+        <NewMatchForm game={game} />
+      </div>
     </section>
   );
 }

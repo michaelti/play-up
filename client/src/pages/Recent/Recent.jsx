@@ -16,18 +16,20 @@ export default function Recent() {
 
   return (
     <main className="recent-page">
-      <section className="recent-page__list">
-        {!matchResults.length && <p>No recent matches...</p>}
-        {matchResults.map((matchResult) => (
-          <MatchCard
-            key={matchResult.id}
-            timestamp={matchResult.timestamp}
-            playerIds={matchResult.playerIds}
-            winnerPlayerId={matchResult.winnerPlayerId}
-            allPlayersData={players}
-          />
-        ))}
-      </section>
+      <div className="recent-page__container">
+        <section className="recent-page__list">
+          {!matchResults.length && <p>No recent matches...</p>}
+          {matchResults.map((matchResult) => (
+            <MatchCard
+              key={matchResult.id}
+              timestamp={matchResult.timestamp}
+              playerIds={matchResult.playerIds}
+              winnerPlayerId={matchResult.winnerPlayerId}
+              allPlayersData={players}
+            />
+          ))}
+        </section>
+      </div>
     </main>
   );
 }
