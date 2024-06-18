@@ -20,7 +20,7 @@ export default function MatchCard({
         {matchPlayers.map((player) => (
           <img
             key={player.id}
-            src={import.meta.env.VITE_BACKEND_URL + player.imageUrl}
+            src={import.meta.env.VITE_BACKEND_URL + player.image_url}
             alt={player.name}
             className={`match-card__player-icon ${
               player.id === winnerPlayer.id

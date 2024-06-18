@@ -22,7 +22,7 @@ export default function Rankings() {
             .map((player) => (
               <RankCard
                 key={player.id}
-                icon={import.meta.env.VITE_BACKEND_URL + player.imageUrl}
+                icon={import.meta.env.VITE_BACKEND_URL + player.image_url}
                 name={player.name}
                 points={player.points}
               />
