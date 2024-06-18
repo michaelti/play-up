@@ -1,0 +1,16 @@
+{
+  "name": "play-up",
+  "version": "1.0.0",
+  "description": "Pair Programming hackathon BrainStation London 2024",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently 'cd client && npm start' 'cd server && npm start'",
+    "dev": "concurrently -n 'client,server' 'cd client && npm run dev' 'cd server && npm run dev'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
