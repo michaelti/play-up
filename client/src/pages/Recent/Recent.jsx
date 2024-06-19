@@ -23,6 +23,7 @@ export default function Recent() {
               key={match.id}
               timestamp={match.created_at}
               players={match.players}
+              game={match.game}
             />
           ))}
         </section>
