@@ -21,12 +21,15 @@ const saveNewPlayer = async (player) => {
   return newPlayer;
 };
 
-const increasePlayerPoints = (id, points) => {
-  const players = retrieveAllPlayers();
-  const playerIndex = players.findIndex((player) => player.id === id);
-  players[playerIndex].points += points;
-  fs.writeFileSync("./data/players.json", JSON.stringify(players));
-  return players[playerIndex].points;
+const increasePlayerPoints = async (id, points) => {
+  await db.execute("UPDATE players SET points = points + ? WHERE id = ?", [
+    points,
+    id,
+  ]);
+
+  const updatedPlayer = retrieveSinglePlayer(id);
+
+  return updatedPlayer;
 };
 
 export {
