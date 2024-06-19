@@ -31,4 +31,12 @@
       transform: scale(1.25);
     }
   }
+
+  &__game-icon {
+    display: block;
+    height: 3rem;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
 }
