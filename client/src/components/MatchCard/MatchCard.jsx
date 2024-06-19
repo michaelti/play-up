@@ -2,7 +2,7 @@ import "./MatchCard.scss";
 
 export default function MatchCard({ timestamp, players, game }) {
   const formattedTime = new Date(timestamp).toLocaleString();
-  console.log(game);
+
   return (
     <article className="match-card">
       <span className="match-card__players">
