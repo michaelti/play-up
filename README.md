@@ -1,8 +1,9 @@
 # play-up
+
 Pair Programming hackathon BrainStation London 2024
 
 Todo: PlayUp
-- [ ] Database!
+
 - [ ] Typescript!
 - [ ] Animations / sound effects
 - [ ] Use route loaders instead of custom hook
@@ -12,6 +13,8 @@ Todo: PlayUp
 - [x] Don’t hardcode it being two players per match
 - [x] Don’t hardcode first player winning
 - [x] Increment points
+- [x] Database!
 
 Nice-to-haves:
+
 - [ ] Get players data from KG Portal
