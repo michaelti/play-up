@@ -3,14 +3,13 @@ import useAxios from "../../hooks/useAxios";
 import MatchCard from "../../components/MatchCard/MatchCard";
 
 export default function Recent() {
-  const [matchResults, loading, error] = useAxios("/match-results");
-  const [players, loadingPlayers, errorPlayers] = useAxios("/players");
+  const [match, loading, error] = useAxios("/matches");
 
-  if (loading || loadingPlayers) {
+  if (loading) {
     return <></>;
   }
 
-  if (error || errorPlayers) {
+  if (error) {
     return <div>Error: {error.message || errorPlayers.message}</div>;
   }
 
@@ -18,14 +17,12 @@ export default function Recent() {
     <main className="recent-page">
       <div className="recent-page__container">
         <section className="recent-page__list">
-          {!matchResults.length && <p>No recent matches...</p>}
-          {matchResults.map((matchResult) => (
+          {!match.length && <p>No recent matches...</p>}
+          {match.map((match) => (
             <MatchCard
-              key={matchResult.id}
-              timestamp={matchResult.timestamp}
-              playerIds={matchResult.playerIds}
-              winnerPlayerId={matchResult.winnerPlayerId}
-              allPlayersData={players}
+              key={match.id}
+              timestamp={match.created_at}
+              players={match.players}
             />
           ))}
         </section>

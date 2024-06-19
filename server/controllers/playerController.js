@@ -22,7 +22,7 @@ const getSinglePlayer = async (req, res) => {
     if (!player) {
       return res
         .status(404)
-        .json({ message: `Could not find player with id ${playerId}` });
+        .json({ error: `Could not find player with id ${playerId}` });
     }
 
     res.json(player);
