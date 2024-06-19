@@ -7,10 +7,16 @@ const retrieveAllMatches = async () => {
     "SELECT * FROM matches ORDER BY created_at DESC"
   );
 
-  // Get matches with their related player data
+  // Get matches with their related data
   // This is not optimal, but is an approach that students might try
 
   for (const match of matches) {
+    const [matchGame] = await db.execute("SELECT * FROM games WHERE id = ?", [
+      match.game_id,
+    ]);
+
+    match.game = matchGame;
+
     match.players = [];
 
     const [matchPlayers] = await db.execute(
@@ -40,10 +46,16 @@ const retrieveSingleMatch = async (id) => {
   const [rows] = await db.execute("SELECT * FROM matches WHERE id = ?", [id]);
   const match = rows[0];
 
-  match.players = [];
-
-  // Get related player data
+  // Get related data
   // This is not optimal, but is an approach that students might try
+
+  const [matchGame] = await db.execute("SELECT * FROM games WHERE id = ?", [
+    match.game_id,
+  ]);
+
+  match.game = matchGame;
+
+  match.players = [];
 
   const [matchPlayers] = await db.execute(
     "SELECT * FROM matches_players WHERE match_id = ?",
