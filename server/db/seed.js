@@ -33,14 +33,14 @@ await db.execute(`
 `);
 
 await db.execute(`
-    INSERT INTO matches_players (match_id, player_id, is_winner) VALUES
-        (1, 1, true),
-        (1, 2, false),
-        (1, 3, false),
-        (2, 1, false),
-        (2, 3, true),
-        (3, 2, true),
-        (3, 3, false);
+    INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES
+        (1, 1, true, 100),
+        (1, 2, false, 50),
+        (1, 3, false, 50),
+        (2, 1, false, 50),
+        (2, 3, true, 100),
+        (3, 2, true, 100),
+        (3, 3, false, 50);
 `);
 
 process.exit();

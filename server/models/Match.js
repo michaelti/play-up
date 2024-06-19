@@ -35,6 +35,7 @@ const retrieveAllMatches = async () => {
       match.players.push({
         ...player,
         isWinner: Boolean(matchPlayer.is_winner),
+        pointsGiven: matchPlayer.points_given,
       });
     }
   }
@@ -73,6 +74,7 @@ const retrieveSingleMatch = async (id) => {
     match.players.push({
       ...player,
       isWinner: Boolean(matchPlayer.is_winner),
+      pointsGiven: matchPlayer.points_given,
     });
   }
 
@@ -92,8 +94,8 @@ const saveNewMatch = async (match) => {
     const points = isWinner ? 100 : 50;
 
     await db.execute(
-      "INSERT INTO matches_players (match_id, player_id, is_winner) VALUES (?, ?, ?)",
-      [newMatchId, playerId, isWinner]
+      "INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES (?, ?, ?, ?)",
+      [newMatchId, playerId, isWinner, points]
     );
 
     await increasePlayerPoints(playerId, points);

@@ -1,6 +1,6 @@
 import "./MatchPlayer.scss";
 
-export default function MatchPlayer({ name, image, isWinner, pointChange }) {
+export default function MatchPlayer({ name, image, isWinner, pointsGiven }) {
   return (
     <div className="match-player">
       <div
@@ -17,6 +17,7 @@ export default function MatchPlayer({ name, image, isWinner, pointChange }) {
         />
       </div>
       <span className="match-player__name">{name}</span>
+      <span className="match-player__points">+{pointsGiven}</span>
     </div>
   );
 }

@@ -32,6 +32,7 @@ export default function MatchCard({ timestamp, players, game }) {
                 image={image}
                 name={player.name}
                 isWinner={player.isWinner}
+                pointsGiven={player.pointsGiven}
               />
             );
           })}

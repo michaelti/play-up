@@ -37,7 +37,8 @@ await db.execute(`
         FOREIGN KEY (match_id) REFERENCES matches(id),
         player_id int NOT NULL,
         FOREIGN KEY (player_id) REFERENCES players(id),
-        is_winner bool NOT NULL DEFAULT 0
+        is_winner bool NOT NULL DEFAULT 0,
+        points_given int NOT NULL DEFAULT 0
     );
 `);
 
