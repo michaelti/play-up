@@ -1,0 +1,32 @@
+@use "../../styles/colors" as *;
+
+.match-player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__image-wrapper {
+    position: relative;
+  }
+
+  &__image-wrapper--winner::before {
+    content: "👑";
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(15%, -25%) rotateZ(15deg);
+  }
+
+  &__image {
+    display: block;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid $background;
+    padding: 0.125rem;
+
+    &--winner {
+      border-color: $primary;
+    }
+  }
+}

@@ -1,34 +1,39 @@
+import MatchPlayer from "../MatchPlayer/MatchPlayer";
 import "./MatchCard.scss";
+import { formatRelative } from "date-fns";
 
 export default function MatchCard({ timestamp, players, game }) {
-  const formattedTime = new Date(timestamp).toLocaleString();
+  const formattedTime = formatRelative(timestamp, new Date());
 
   return (
     <article className="match-card">
-      <span className="match-card__players">
+      <header className="match-card__header">
         <img
-          src={import.meta.env.VITE_BACKEND_URL + game.image_url}
-          alt={game.name}
           className="match-card__game-icon"
+          src={import.meta.env.VITE_BACKEND_URL + game.image_url}
+          alt=""
         />
+        <div>
+          <h2 className="match-card__title">{game.name}</h2>
+          <span className="match-card__time">{formattedTime}</span>
+        </div>
+      </header>
+      <div className="match-card__players">
         {players.map((player) => {
           const image = player.image_url
             ? import.meta.env.VITE_BACKEND_URL + player.image_url
             : `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
 
           return (
-            <img
+            <MatchPlayer
               key={player.id}
-              src={image}
-              alt={player.name}
-              className={`match-card__player-icon ${
-                player.isWinner ? "match-card__player-icon--winner" : ""
-              }`}
+              image={image}
+              name={player.name}
+              isWinner={player.isWinner}
             />
           );
         })}
-      </span>
-      <span className="match-card__time">{formattedTime}</span>
+      </div>
     </article>
   );
 }

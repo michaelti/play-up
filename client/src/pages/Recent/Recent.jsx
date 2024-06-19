@@ -18,6 +18,7 @@ export default function Recent() {
       <div className="recent-page__container">
         <section className="recent-page__list">
           {!match.length && <p>No recent matches...</p>}
+
           {match.map((match) => (
             <MatchCard
               key={match.id}
