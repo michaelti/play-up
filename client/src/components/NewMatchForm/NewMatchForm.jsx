@@ -60,12 +60,15 @@ export default function NewMatchForm({ game }) {
         isMulti
         onChange={(selectedPlayers) => setSelectedPlayers(selectedPlayers)}
         options={playersList}
+        placeholder="Select players..."
       />
       <p>Who won?</p>
       <Select
         value={selectedWinner}
         onChange={(selectedWinner) => setSelectedWinner(selectedWinner)}
-        options={playersList}
+        options={selectedPlayers}
+        isDisabled={!selectedPlayers}
+        placeholder={selectedPlayers ? "Select winner..." : "Select players first..."}
       />
       <button disabled={formSubmitted} className="form__btn">
         Save Match Details

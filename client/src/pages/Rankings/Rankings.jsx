@@ -19,14 +19,20 @@ export default function Rankings() {
         <section className="rankings-page__list">
           {players
             .sort((a, b) => b.points - a.points)
-            .map((player) => (
-              <RankCard
-                key={player.id}
-                icon={import.meta.env.VITE_BACKEND_URL + player.image_url}
-                name={player.name}
-                points={player.points}
-              />
-            ))}
+            .map((player) => {
+              const image = player.image_url
+                ? import.meta.env.VITE_BACKEND_URL + player.image_url
+                : `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
+
+              return (
+                <RankCard
+                  key={player.id}
+                  icon={image}
+                  name={player.name}
+                  points={player.points}
+                />
+              );
+            })}
         </section>
       </div>
     </main>
