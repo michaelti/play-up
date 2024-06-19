@@ -19,20 +19,22 @@ export default function MatchCard({ timestamp, players, game }) {
         </div>
       </header>
       <div className="match-card__players">
-        {players.map((player) => {
-          const image = player.image_url
-            ? import.meta.env.VITE_BACKEND_URL + player.image_url
-            : `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
+        {players
+          .toSorted((a, b) => b.isWinner - a.isWinner)
+          .map((player) => {
+            const image = player.image_url
+              ? import.meta.env.VITE_BACKEND_URL + player.image_url
+              : `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
 
-          return (
-            <MatchPlayer
-              key={player.id}
-              image={image}
-              name={player.name}
-              isWinner={player.isWinner}
-            />
-          );
-        })}
+            return (
+              <MatchPlayer
+                key={player.id}
+                image={image}
+                name={player.name}
+                isWinner={player.isWinner}
+              />
+            );
+          })}
       </div>
     </article>
   );
