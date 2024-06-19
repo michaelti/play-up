@@ -23,7 +23,7 @@ export default function Library() {
               key={game.id}
               id={game.id}
               title={game.name}
-              img={import.meta.env.VITE_BACKEND_URL + game.imageUrl}
+              img={import.meta.env.VITE_BACKEND_URL + game.image_url}
             />
           ))}
 

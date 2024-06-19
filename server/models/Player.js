@@ -1,21 +1,24 @@
-import fs from "fs";
-import crypto from "crypto";
+import db from "../db/connection.js";
 
-const retrieveAllPlayers = () => {
-  const playersJson = fs.readFileSync("./data/Players.json");
-  return JSON.parse(playersJson);
+const retrieveAllPlayers = async () => {
+  const [rows] = await db.execute("SELECT * FROM players");
+  return rows;
 };
 
-const retrieveSinglePlayer = (id) => {
-  const players = retrieveAllPlayers();
-  return players.find((player) => player.id === id);
-};
-
-const saveNewPlayer = (player) => {
-  const players = retrieveAllPlayers();
-  players.push({ id: crypto.randomUUID(), ...player });
-  fs.writeFileSync("./data/players.json", JSON.stringify(players));
+const retrieveSinglePlayer = async (id) => {
+  const [rows] = await db.execute("SELECT * FROM players WHERE id = ?", [id]);
+  const player = rows[0];
   return player;
+};
+
+const saveNewPlayer = async (player) => {
+  const [result] = await db.execute(
+    "INSERT INTO players (name, image_url) VALUES (?, ?)",
+    [player.name, player.image_url]
+  );
+
+  const newPlayer = retrieveSinglePlayer(result.insertId);
+  return newPlayer;
 };
 
 const increasePlayerPoints = (id, points) => {

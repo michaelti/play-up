@@ -50,7 +50,7 @@ export default function NewMatchForm({ game }) {
     <form className="form" onSubmit={handleSubmit}>
       <p>Game: {game.name}</p>
       <img
-        src={`${import.meta.env.VITE_BACKEND_URL}${game.imageUrl}`}
+        src={`${import.meta.env.VITE_BACKEND_URL}${game.image_url}`}
         alt={game.name}
         className="form__img"
       />

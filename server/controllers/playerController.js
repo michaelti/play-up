@@ -4,31 +4,38 @@ import {
   saveNewPlayer,
 } from "../models/Player.js";
 
-const getAllPlayers = (_req, res) => {
+const getAllPlayers = async (_req, res) => {
   try {
-    const players = retrieveAllPlayers();
+    const players = await retrieveAllPlayers();
     res.json(players);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
 };
 
-const getSinglePlayer = (req, res) => {
+const getSinglePlayer = async (req, res) => {
   const playerId = req.params.id;
 
   try {
-    const player = retrieveSinglePlayer(playerId);
+    const player = await retrieveSinglePlayer(playerId);
+
+    if (!player) {
+      return res
+        .status(404)
+        .json({ message: `Could not find player with id ${playerId}` });
+    }
+
     res.json(player);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
 };
 
-const addNewPlayer = (req, res) => {
+const addNewPlayer = async (req, res) => {
   const player = req.body;
 
   try {
-    const newPlayer = saveNewPlayer(player);
+    const newPlayer = await saveNewPlayer(player);
     res.json(newPlayer);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
