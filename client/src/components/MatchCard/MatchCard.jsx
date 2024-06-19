@@ -3,7 +3,7 @@ import "./MatchCard.scss";
 import { formatRelative } from "date-fns";
 
 export default function MatchCard({ timestamp, players, game }) {
-  const formattedTime = formatRelative(timestamp, new Date());
+  const formattedTime = formatRelative(new Date(timestamp), new Date());
 
   return (
     <article className="match-card">
