@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function NewMatchForm({ game }) {
   const [players, loading, error] = useAxios(`/players`);
   const [_newMatch, _newMatchLoading, _newMatchError, postMatchFn] =
-    useAxiosPost(`/match-results`);
+    useAxiosPost(`/matches`);
   const [selectedPlayers, setSelectedPlayers] = useState(null);
   const [selectedWinner, setSelectedWinner] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -34,7 +34,7 @@ export default function NewMatchForm({ game }) {
     const playerIds = selectedPlayers.map((winner) => winner.value);
 
     postMatchFn({
-      gameId: game.id,
+      game_id: game.id,
       playerIds,
       winnerPlayerId: selectedWinner.value,
     });

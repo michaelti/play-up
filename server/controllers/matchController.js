@@ -6,30 +6,42 @@ import {
 
 const getAllMatches = async (_req, res) => {
   try {
-    const matchResults = await retrieveAllMatches();
-    res.json(matchResults);
+    const matches = await retrieveAllMatches();
+    res.json(matches);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
 };
 
 const getSingleMatch = async (req, res) => {
-  const matchResultId = req.params.id;
+  const matchId = req.params.id;
 
   try {
-    const matchResult = await retrieveSingleMatch(matchResultId);
-    res.json(matchResult);
+    const match = await retrieveSingleMatch(matchId);
+    res.json(match);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
 };
 
-const addNewMatch = (req, res) => {
-  const matchResult = req.body;
+const addNewMatch = async (req, res) => {
+  const match = req.body;
+
+  if (!match.game_id || !match.playerIds || !match.winnerPlayerId) {
+    return res
+      .status(400)
+      .json({ error: `Please include all required fields.` });
+  }
+
+  if (!match.playerIds.includes(match.winnerPlayerId)) {
+    return res
+      .status(400)
+      .json({ error: `winnerPlayerId must exist in playerIds` });
+  }
 
   try {
-    const newMatchResult = saveNewMatch(matchResult);
-    res.status(201).json(newMatchResult);
+    const newMatch = await saveNewMatch(match);
+    res.status(201).json(newMatch);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
