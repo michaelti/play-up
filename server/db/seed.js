@@ -16,9 +16,9 @@ await db.execute(`
 
 await db.execute(`
     INSERT INTO players (id, name, points, image_url) VALUES
-        (1, 'Joe', 0, '/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg'),
-        (2, 'Sammy', 0, '/images/23a2111d-a516-4d3d-9173-9799a47ae336.jpg'),
-        (3, 'Michael', 0, '/images/a43f1982-654b-4486-b110-50e3334042b1.jpg'),
+        (1, 'Joe', 150, '/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg'),
+        (2, 'Sammy', 150, '/images/23a2111d-a516-4d3d-9173-9799a47ae336.jpg'),
+        (3, 'Michael', 200, '/images/a43f1982-654b-4486-b110-50e3334042b1.jpg'),
         (4, 'Tom', 0, NULL),
         (5, 'Suzanne', 0, NULL),
         (6, 'Matt', 0, NULL),
@@ -33,14 +33,14 @@ await db.execute(`
 `);
 
 await db.execute(`
-    INSERT INTO matches_players (match_id, player_id, is_winner) VALUES
-        (1, 1, true),
-        (1, 2, false),
-        (1, 3, false),
-        (2, 1, false),
-        (2, 3, true),
-        (3, 2, true),
-        (3, 3, false);
+    INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES
+        (1, 1, true, 100),
+        (1, 2, false, 50),
+        (1, 3, false, 50),
+        (2, 1, false, 50),
+        (2, 3, true, 100),
+        (3, 2, true, 100),
+        (3, 3, false, 50);
 `);
 
 process.exit();

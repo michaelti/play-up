@@ -1,42 +1,41 @@
 @use "../../styles/colors" as *;
 
 .match-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  align-items: center;
-  padding: 1rem 0;
-  gap: 1rem;
+  border-radius: 0.25rem;
+  max-width: 28rem;
+  background-color: $card;
 
-  &__time {
-    text-align: right;
-  }
-
-  &__players {
+  &__header {
+    padding: 1rem 0;
+    margin: 0 1rem;
+    border-bottom: 2px solid $background;
     display: flex;
-  }
-
-  &__player-icon {
-    display: block;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    margin-right: -0.25rem;
-    border: 2px solid $accent;
-    padding: 0.125rem;
-    background-color: $background;
-
-    &--winner {
-      border-color: $primary;
-      transform: scale(1.25);
-    }
+    gap: 1rem;
+    align-items: center;
   }
 
   &__game-icon {
     display: block;
-    height: 3rem;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    margin-right: 1rem;
+    height: 2.5rem;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.125rem;
+  }
+
+  &__title {
+    font-family: Viga;
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  &__time {
+    font-size: 0.85rem;
+    margin-left: auto;
+  }
+
+  &__players {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
   }
 }
