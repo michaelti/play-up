@@ -14,11 +14,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(15%, -25%) rotateZ(15deg);
+    transform: translate(20%, -40%) rotateZ(15deg);
   }
 
   &__image {
     display: block;
+    object-fit: cover;
     height: 2.5rem;
     width: 2.5rem;
     border-radius: 50%;
@@ -32,7 +33,6 @@
 
   &__points {
     margin-left: auto;
-    color: $background;
-    text-shadow: 0 0 2px $text;
+    color: $text-light;
   }
 }
