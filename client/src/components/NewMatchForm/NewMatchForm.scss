@@ -1,9 +1,7 @@
 @use "../../styles/colors" as *;
 
 .form {
-  &__img {
-    width: 10rem;
-  }
+  padding: 0 1rem;
 
   &__btn {
     background-color: $primary;
