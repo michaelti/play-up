@@ -4,6 +4,7 @@ import Select from "react-select";
 import "./NewMatchForm.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PlayerPicker from "../PlayerPicker/PlayerPicker";
 
 export default function NewMatchForm({ game }) {
   const [players, loading, error] = useAxios(`/players`);
@@ -55,6 +56,7 @@ export default function NewMatchForm({ game }) {
         className="form__img"
       />
       <p>Who was playing?</p>
+      <PlayerPicker />
       <Select
         value={selectedPlayers}
         isMulti

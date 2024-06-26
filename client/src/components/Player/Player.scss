@@ -1,0 +1,11 @@
+@use "../../styles/colors" as *;
+
+// TODO: Duplication from RankCard - can we make it more dry?
+.player {
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  padding: 0.125rem;
+  background-color: $background;
+}

@@ -1,0 +1,9 @@
+@use "../../styles/colors" as *;
+
+.players {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1rem;
+}
