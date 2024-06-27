@@ -13,9 +13,14 @@ export default function GamePicker({ onChange, value }) {
   }
 
   return (
-    <div>
+    <div className="game-picker">
       {games.map((game) => (
-        <div className="game-picker-item" key={game.id}>
+        <div
+          className={`game-picker-item ${
+            value && value.id !== game.id ? "game-picker-item--dismissed" : ""
+          }`}
+          key={game.id}
+        >
           <input
             className="game-picker-item__input"
             id={"game-picker-" + game.id}
@@ -24,13 +29,17 @@ export default function GamePicker({ onChange, value }) {
             value={game.id}
             checked={value?.id === game.id}
             onChange={() => onChange(game)}
+            onClick={() => value?.id === game.id && onChange(null)}
           />
           <label
             className="game-picker-item__label"
             htmlFor={"game-picker-" + game.id}
           >
-            <img src={game} alt="" />
-            {game.name}
+            <img
+              className="game-picker-item__image"
+              src={import.meta.env.VITE_BACKEND_URL + game.image_url}
+              alt={game.name}
+            />
           </label>
         </div>
       ))}
