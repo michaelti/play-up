@@ -19,9 +19,12 @@
   flex: calc(100% / 3.5 - 0.5rem) 0 0;
   margin-right: 1rem;
   display: grid;
+  transition: margin-right 0.1s, opacity 0.1s, visibility 0.1s;
 
   &--dismissed {
-    filter: grayscale(1);
+    margin-right: calc(-1 * (100% / 3.5 - 0.5rem));
+    opacity: 0;
+    visibility: hidden;
   }
 
   &__input {
@@ -34,8 +37,9 @@
   &__label {
     grid-area: 1 / 1;
     aspect-ratio: 2/3;
-    transition: padding 0.1s, transform 0.1s;
+    transition: padding 0.1s, border-width 0.1s, transform 0.1s;
     transform: rotateZ(1deg);
+    cursor: pointer;
   }
 
   &__input:checked + &__label {
