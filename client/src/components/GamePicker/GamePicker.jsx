@@ -17,7 +17,7 @@ export default function GamePicker({ onChange, value }) {
       {games.map((game) => (
         <div
           className={`game-picker-item ${
-            value && value.id !== game.id ? "game-picker-item--dismissed" : ""
+            value ? "game-picker-item--done" : ""
           }`}
           key={game.id}
         >
