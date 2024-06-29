@@ -1,8 +1,15 @@
 import "./GamePicker.scss";
 import useAxios from "../../hooks/useAxios";
+import { useState } from "react";
 
 export default function GamePicker({ onChange, value }) {
   const [games, loading, error] = useAxios("/games");
+  const [topOfStack, setTopOfStack] = useState(0);
+
+  const handleChange = (game, i) => {
+    onChange(game);
+    setTopOfStack(i);
+  };
 
   if (loading) {
     return <></>;
@@ -14,11 +21,14 @@ export default function GamePicker({ onChange, value }) {
 
   return (
     <div className="game-picker">
-      {games.map((game) => (
+      {games.map((game, i) => (
         <div
           className={`game-picker-item ${
             value ? "game-picker-item--done" : ""
           }`}
+          style={{
+            "--stackPosition": games.length - Math.abs(topOfStack - i),
+          }}
           key={game.id}
         >
           <input
@@ -28,8 +38,8 @@ export default function GamePicker({ onChange, value }) {
             name="game-picker"
             value={game.id}
             checked={value?.id === game.id}
-            onChange={() => onChange(game)}
-            onClick={() => value?.id === game.id && onChange(null)}
+            onChange={() => handleChange(game, i)}
+            onClick={() => value?.id === game.id && handleChange(null, i)}
           />
           <label
             className="game-picker-item__label"

@@ -22,11 +22,8 @@
   margin-right: var(--gap);
   scroll-snap-align: start;
   display: grid;
-  transition: margin-right 0.1s;
-
-  &:focus-within {
-    z-index: 1;
-  }
+  transition: margin-right 1s;
+  z-index: var(--stackPosition);
 
   &--done {
     margin-right: calc(-1 * var(--width));
