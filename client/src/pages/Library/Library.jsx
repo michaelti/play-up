@@ -2,7 +2,6 @@ import useAxios from "../../hooks/useAxios";
 import "./Library.scss";
 import GameCard from "../../components/GameCard/GameCard";
 import plusIcon from "../../assets/plus.svg";
-import GamePicker from "../../components/GamePicker/GamePicker";
 import { useState } from "react";
 
 export default function Library() {
@@ -19,7 +18,6 @@ export default function Library() {
 
   return (
     <main className="library-page">
-      <GamePicker onChange={setGame} value={game} />
       <div className="library-page__container">
         <section className="library-page__grid">
           {games.map((game) => (
