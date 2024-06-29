@@ -20,7 +20,7 @@ export default function GamePicker({ onChange, value }) {
   }
 
   return (
-    <div className="game-picker">
+    <div className={`game-picker ${value ? "game-picker--done" : ""}`}>
       {games.map((game, i) => (
         <div
           className={`game-picker-item ${

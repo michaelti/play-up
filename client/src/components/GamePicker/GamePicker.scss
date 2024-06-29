@@ -1,5 +1,6 @@
 .game-picker {
   --items: 3.5;
+  --gap: 1rem;
 
   display: flex;
   overflow-x: scroll;
@@ -16,7 +17,6 @@
 }
 
 .game-picker-item {
-  --gap: 1rem;
   --width: calc((100% - var(--gap) * (var(--items) - 1)) / var(--items));
   flex: var(--width) 0 0;
   margin-right: var(--gap);
