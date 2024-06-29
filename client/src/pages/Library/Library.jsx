@@ -2,11 +2,9 @@ import useAxios from "../../hooks/useAxios";
 import "./Library.scss";
 import GameCard from "../../components/GameCard/GameCard";
 import plusIcon from "../../assets/plus.svg";
-import { useState } from "react";
 
 export default function Library() {
   const [games, loading, error] = useAxios("/games");
-  const [game, setGame] = useState(null);
 
   if (loading) {
     return <></>;
