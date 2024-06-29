@@ -22,7 +22,7 @@
   margin-right: var(--gap);
   scroll-snap-align: start;
   display: grid;
-  transition: margin-right 1s;
+  transition: margin-right 0.1s;
   z-index: var(--stackPosition);
 
   &--done {
