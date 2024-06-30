@@ -49,6 +49,7 @@ export default function GamePicker({ onChange, value }) {
               className="game-picker-item__image"
               src={import.meta.env.VITE_BACKEND_URL + game.image_url}
               alt={game.name}
+              title={game.name}
             />
           </label>
         </div>
