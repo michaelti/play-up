@@ -1,13 +1,13 @@
 @use "../../styles/colors" as *;
 
-.player-picker {
+.winner-picker {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.player-picker-item {
+.winner-picker-item {
   display: grid;
 
   &__input {
@@ -28,7 +28,15 @@
   }
 
   &__input:checked + &__label &__image {
-    border-color: $accent;
+    border-color: $primary;
+  }
+
+  &__input:checked + &__label::before {
+    content: "👑";
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(15%, -25%) rotateZ(15deg);
   }
 
   &__image {

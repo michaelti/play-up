@@ -1,6 +1,7 @@
 import "./PlayerPicker.scss";
 import useAxios from "../../hooks/useAxios";
-import { getPlayerImage } from "../../utils/getImage";
+import Player from "../Player/Player";
+import getPlayerImage from "../../utils/getImage";
 
 export default function PlayerPicker({ onChange, value }) {
   const [players, loading, error] = useAxios("/players");
