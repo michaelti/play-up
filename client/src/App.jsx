@@ -1,9 +1,7 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Library from "./pages/Library/Library";
-import Recent from "./pages/Recent/Recent";
+import Home from "./pages/Home/Home";
 import Rankings from "./pages/Rankings/Rankings";
-import NewMatch from "./pages/NewMatch/NewMatch";
 import Nav from "./components/Nav/Nav";
 
 function App() {
@@ -11,10 +9,8 @@ function App() {
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/" element={<Library />} />
-        <Route path="/rankings" element={<Rankings />} />
-        <Route path="/recent" element={<Recent />} />
-        <Route path="/new-match/:gameId" element={<NewMatch />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/leaderboard" element={<Rankings />} />
       </Routes>
     </BrowserRouter>
   );

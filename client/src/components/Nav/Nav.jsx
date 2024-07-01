@@ -13,13 +13,10 @@ export default function Nav() {
 
         <div className="nav__links">
           <NavLink to="/" className="nav__link">
-            Library
+            Home
           </NavLink>
-          <NavLink to="/rankings" className="nav__link">
-            Rankings
-          </NavLink>
-          <NavLink to="/recent" className="nav__link">
-            Recent
+          <NavLink to="/leaderboard" className="nav__link">
+            Leaderboard
           </NavLink>
         </div>
       </div>
