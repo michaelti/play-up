@@ -1,54 +1,112 @@
 import useAxiosPost from "../../hooks/useAxiosPost";
 import "./NewMatchForm.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import PlayerPicker from "../PlayerPicker/PlayerPicker";
 import WinnerPicker from "../WinnerPicker/WinnerPicker";
-import { getGameImage } from "../../utils/getImage";
+import GamePicker from "../GamePicker/GamePicker";
 
-export default function NewMatchForm({ game }) {
+export default function NewMatchForm({ onSave }) {
   const [_newMatch, _newMatchLoading, _newMatchError, postMatchFn] =
     useAxiosPost(`/matches`);
-  const [selectedPlayers, setSelectedPlayers] = useState([]);
-  const [selectedWinner, setSelectedWinner] = useState(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [players, setPlayers] = useState([]);
+  const [isDoneSelectingPlayers, setIsDoneSelectingPlayers] = useState(false);
+  const [winner, setWinner] = useState(null);
+  const [game, setGame] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    postMatchFn({
+    setIsSubmitting(true);
+
+    await postMatchFn({
       game_id: game.id,
-      playerIds: selectedPlayers.map((player) => player.id),
-      winnerPlayerId: selectedWinner.id,
+      playerIds: players.map((player) => player.id),
+      winnerPlayerId: winner.id,
     });
 
-    setFormSubmitted(true);
+    await onSave();
 
-    setTimeout(() => {
-      navigate("/recent");
-    }, 1000);
+    setWinner(null);
+    setPlayers([]);
+    setIsDoneSelectingPlayers(false);
+    setGame(null);
+    setIsSubmitting(false);
   };
+
+  let message = "Pick a game";
+
+  if (game) {
+    message = "Pick players";
+  }
+
+  if (game && isDoneSelectingPlayers) {
+    message = "Pick a winner";
+  }
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <p>Game: {game.name}</p>
-      <img src={getGameImage(game)} alt={game.name} className="form__img" />
-      <p>Who was playing?</p>
-      <PlayerPicker value={selectedPlayers} onChange={setSelectedPlayers} />
-      <p>Who won?</p>
-      <WinnerPicker
-        value={selectedWinner}
-        onChange={setSelectedWinner}
-        options={selectedPlayers}
-      />
-      <button disabled={formSubmitted || !selectedWinner} className="form__btn">
-        Save Match Details
-      </button>
-      {formSubmitted && (
-        <p className="form__success">Saved! Redirecting to Recent page...</p>
-      )}
+      <header className="form__header">
+        <h2 className="form__title">{message}</h2>
+
+        <div className="form__buttons">
+          {game && !isDoneSelectingPlayers && (
+            <>
+              <button
+                className="form__btn form__btn--back"
+                type="button"
+                onClick={() => setGame(null)}
+                disabled={isSubmitting}
+              >
+                &larr; Back
+              </button>
+              <button
+                className="form__btn"
+                type="button"
+                onClick={() => setIsDoneSelectingPlayers(true)}
+                disabled={players.length === 0}
+              >
+                Next &rarr;
+              </button>
+            </>
+          )}
+
+          {game && isDoneSelectingPlayers && (
+            <>
+              <button
+                className="form__btn form__btn--back"
+                type="button"
+                onClick={() => setIsDoneSelectingPlayers(false)}
+                disabled={isSubmitting}
+              >
+                &larr; Back
+              </button>
+              <button
+                className="form__btn form__btn--save"
+                disabled={!winner || isSubmitting}
+              >
+                Save &#10003;
+              </button>
+            </>
+          )}
+        </div>
+      </header>
+
+      <div className="form__game-picker">
+        <GamePicker value={game} onChange={setGame}>
+          {game && !isDoneSelectingPlayers && (
+            <PlayerPicker value={players} onChange={setPlayers} />
+          )}
+
+          {isDoneSelectingPlayers && (
+            <WinnerPicker
+              value={winner}
+              onChange={setWinner}
+              options={players}
+            />
+          )}
+        </GamePicker>
+      </div>
     </form>
   );
 }

@@ -1,6 +1,9 @@
+@use "../../styles/responsive" as *;
+
 .game-picker {
   --items: 3.5;
   --gap: 1rem;
+  --width: calc((100% - var(--gap) * (var(--items) - 1)) / var(--items));
 
   display: flex;
   overflow-x: scroll;
@@ -14,10 +17,19 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @include tablet {
+    --items: 5.5;
+  }
+
+  &__children {
+    margin-left: calc(var(--width) + var(--gap));
+    width: calc(100% - var(--width) - var(--gap));
+    flex-shrink: 0;
+  }
 }
 
 .game-picker-item {
-  --width: calc((100% - var(--gap) * (var(--items) - 1)) / var(--items));
   flex: var(--width) 0 0;
   margin-right: var(--gap);
   scroll-snap-align: start;

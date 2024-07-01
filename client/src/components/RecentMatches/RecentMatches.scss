@@ -1,0 +1,16 @@
+@use "../../styles/colors" as *;
+
+.recent-matches {
+  padding: 0 1rem;
+
+  &__title {
+    border-top: 2px solid $card;
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+  &__list {
+    display: grid;
+    gap: 1rem;
+  }
+}

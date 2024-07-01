@@ -4,6 +4,8 @@
   border-radius: 0.25rem;
   max-width: 28rem;
   background-color: $card;
+  animation: match-card-fadein 0.2s;
+  animation-fill-mode: both;
 
   &__header {
     padding: 1rem 0;
@@ -37,5 +39,17 @@
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
+  }
+}
+
+@keyframes match-card-fadein {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
