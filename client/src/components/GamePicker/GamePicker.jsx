@@ -1,15 +1,30 @@
 import "./GamePicker.scss";
 import useAxios from "../../hooks/useAxios";
-import { useState, Children } from "react";
+import { useState, Children, useEffect } from "react";
 
 export default function GamePicker({ onChange, value, children }) {
   const [games, loading, error] = useAxios("/games");
   const [topOfStack, setTopOfStack] = useState(0);
+  const [hideChildren, setHideChildren] = useState(false);
 
   const handleChange = (game, i) => {
     onChange(game);
     setTopOfStack(i);
   };
+
+  const hasChildren = Children.toArray(children).some((child) => !!child);
+
+  useEffect(() => {
+    let timeout;
+
+    if (hasChildren) {
+      timeout = setTimeout(() => setHideChildren(false), 100);
+    } else {
+      setHideChildren(true);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [hasChildren]);
 
   if (loading) {
     return <></>;
@@ -18,8 +33,6 @@ export default function GamePicker({ onChange, value, children }) {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  const hasChildren = Children.toArray(children).some((child) => !!child);
 
   return (
     <div className={`game-picker ${value ? "game-picker--done" : ""}`}>
@@ -57,7 +70,7 @@ export default function GamePicker({ onChange, value, children }) {
         </div>
       ))}
 
-      {hasChildren && <div className="game-picker__children">{children}</div>}
+      {!hideChildren && <div className="game-picker__children">{children}</div>}
     </div>
   );
 }
