@@ -29,7 +29,7 @@ const addNewGame = async (req, res) => {
 
   try {
     const newGame = await saveNewGame(game);
-    res.json(newGame);
+    res.status(201).json(newGame);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
