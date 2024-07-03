@@ -15,7 +15,7 @@ beforeEach(async () => {
 });
 
 describe("GET /games", () => {
-  it("Responds with an array of all games", async () => {
+  it("Responds with a list of all games", async () => {
     const response = await request(app).get("/games");
 
     expect(response.status).toBe(200);
