@@ -11,8 +11,6 @@ export default function GamePicker({ onChange, value, children }) {
     setTopOfStack(i);
   };
 
-  const hasChildren = Children.toArray(children).some((child) => !!child);
-
   if (loading) {
     return <></>;
   }
@@ -20,6 +18,8 @@ export default function GamePicker({ onChange, value, children }) {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
+  const hasChildren = Children.toArray(children).some((child) => !!child);
 
   return (
     <div className={"game-picker"}>
