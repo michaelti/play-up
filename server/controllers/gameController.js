@@ -25,7 +25,13 @@ const getSingleGame = async (req, res) => {
 };
 
 const addNewGame = async (req, res) => {
-  const game = req.body;
+  const { name, image_url } = req.body;
+
+  if (!name || !image_url) {
+    return res.status(400).json({ error: "Required fields: name, image_url" });
+  }
+
+  const game = { name, image_url };
 
   try {
     const newGame = await saveNewGame(game);

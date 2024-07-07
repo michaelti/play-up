@@ -53,12 +53,12 @@ describe("GET /games/:id", () => {
 });
 
 describe("POST /games", () => {
-  it("Fails given an invalid body", async () => {
+  it("Fails given an empty body", async () => {
     const body = {};
 
     const response = await request(app).post("/games").send(body);
 
-    expect(response.status).toBeGreaterThanOrEqual(400);
+    expect(response.status).toBe(400);
   });
 
   it("Responds with the new game", async () => {
