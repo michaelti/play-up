@@ -22,7 +22,7 @@ export default function GamePicker({ onChange, value, children }) {
   const hasChildren = Children.toArray(children).some((child) => !!child);
 
   return (
-    <div className={"game-picker"}>
+    <div className="game-picker">
       {games.map((game, i) => (
         <div
           className={`game-picker-item ${
