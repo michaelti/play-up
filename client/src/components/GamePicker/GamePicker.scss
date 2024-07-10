@@ -10,6 +10,7 @@
   scroll-snap-type: x mandatory;
   scroll-padding: 1rem;
   padding: 1rem;
+  align-items: flex-start;
 
   /* Hide scrollbar on Firefox, IE/Edge, and Chrome/Safari */
   scrollbar-width: none;
@@ -23,7 +24,6 @@
   }
 
   &__children {
-    margin-left: calc(var(--width) + var(--gap));
     width: calc(100% - var(--width) - var(--gap));
     flex-shrink: 0;
   }
@@ -31,14 +31,18 @@
 
 .game-picker-item {
   flex: var(--width) 0 0;
-  margin-right: var(--gap);
   scroll-snap-align: start;
   display: grid;
-  transition: margin-right 0.1s;
+  transition: margin-left 0.1s;
   z-index: var(--stackPosition);
+  margin-right: var(--gap);
 
   &--done {
-    margin-right: calc(-1 * var(--width));
+    scroll-snap-align: none;
+  }
+
+  &--done:not(:first-child) {
+    margin-left: calc(-1 * var(--width) - var(--gap));
   }
 
   &__input {
