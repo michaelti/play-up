@@ -32,11 +32,21 @@ const getSinglePlayer = async (req, res) => {
 };
 
 const addNewPlayer = async (req, res) => {
-  const player = req.body;
+  const { name, points, image_url } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: "Required field: name" });
+  }
+
+  const player = {
+    name,
+    points: points ?? null,
+    image_url: image_url ?? null,
+  };
 
   try {
     const newPlayer = await saveNewPlayer(player);
-    res.json(newPlayer);
+    res.status(201).json(newPlayer);
   } catch (error) {
     res.status(500).json({ error: `Error: ${error.message}` });
   }
