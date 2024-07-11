@@ -4,6 +4,7 @@ import app from "../index.js";
 import db from "../db/connection.js";
 
 beforeEach(async () => {
+  await db.execute(`DELETE from matches`);
   await db.execute(`DELETE from games`);
 
   await db.execute(`

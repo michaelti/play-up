@@ -41,7 +41,6 @@ describe("POST /matches", () => {
     };
 
     const response = await request(app).post("/matches").send(body);
-    console.log(response.body.game_id);
 
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id");
