@@ -1,11 +1,15 @@
-import { it, expect, describe, beforeEach } from "vitest";
+import { it, expect, describe, beforeEach, afterEach } from "vitest";
 import request from "supertest";
 import app from "../index.js";
 import db from "../db/connection.js";
 
-beforeEach(async () => {
+const cleanupMatches = async () => {
   await db.execute(`DELETE from matches_players`);
   await db.execute(`DELETE from matches`);
+};
+
+beforeEach(async () => {
+  await cleanupMatches();
   await db.execute(`DELETE from players`);
   await db.execute(`DELETE from games`);
 
@@ -33,6 +37,10 @@ beforeEach(async () => {
         (1, 1, true, 100), 
         (1, 2, false, 50);
   `);
+});
+
+afterEach(async () => {
+  await cleanupMatches();
 });
 
 describe("GET /matches", () => {
@@ -74,32 +82,30 @@ describe("GET /matches/:id", () => {
     const response = await request(app).get("/matches/1");
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
-      {
-        id: 1,
-        game_id: 1,
-        created_at: "2023-01-01T00:00:00.000Z",
-        game: { id: 1, name: "Game 1", image_url: "/example.jpg" },
-        players: [
-          {
-            id: 1,
-            name: "Joe",
-            points: 150,
-            image_url: "/example.jpg",
-            isWinner: true,
-            pointsGiven: 100,
-          },
-          {
-            id: 2,
-            name: "Sammy",
-            points: 150,
-            image_url: "/example.jpg",
-            isWinner: false,
-            pointsGiven: 50,
-          },
-        ],
-      },
-    );
+    expect(response.body).toEqual({
+      id: 1,
+      game_id: 1,
+      created_at: "2023-01-01T00:00:00.000Z",
+      game: { id: 1, name: "Game 1", image_url: "/example.jpg" },
+      players: [
+        {
+          id: 1,
+          name: "Joe",
+          points: 150,
+          image_url: "/example.jpg",
+          isWinner: true,
+          pointsGiven: 100,
+        },
+        {
+          id: 2,
+          name: "Sammy",
+          points: 150,
+          image_url: "/example.jpg",
+          isWinner: false,
+          pointsGiven: 50,
+        },
+      ],
+    });
   });
 });
 
@@ -138,6 +144,7 @@ describe("POST /matches", () => {
       winnerPlayerId: 1,
     };
 
+    await cleanupMatches();
     await request(app).post("/matches").send(body);
     const [databaseRows] = await db.execute("SELECT game_id FROM matches");
 
@@ -155,6 +162,7 @@ describe("POST /matches", () => {
       winnerPlayerId: 1,
     };
 
+    await cleanupMatches();
     const response = await request(app).post("/matches").send(body);
     const id = response.body.id;
 
@@ -173,6 +181,7 @@ describe("POST /matches", () => {
       winnerPlayerId: 1,
     };
 
+    await cleanupMatches();
     await request(app).post("/matches").send(body);
 
     const [[record]] = await db.execute(
@@ -190,6 +199,7 @@ describe("POST /matches", () => {
       winnerPlayerId: 1,
     };
 
+    await cleanupMatches();
     await request(app).post("/matches").send(body);
 
     const [[matchesPlayersRecord]] = await db.execute(
@@ -213,6 +223,7 @@ describe("POST /matches", () => {
       winnerPlayerId: 1,
     };
 
+    await cleanupMatches();
     await request(app).post("/matches").send(body);
 
     const [[matchesPlayersRecord]] = await db.execute(
