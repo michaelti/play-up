@@ -22,6 +22,85 @@ beforeEach(async () => {
         (2, 'Game 2', '/example.jpg'),
         (3, 'Game 3', '/example.jpg');
   `);
+
+  await db.execute(`
+    INSERT INTO matches (id, game_id, created_at) VALUES 
+        (1, 1, '2023-01-01 00:00:00');
+  `);
+
+  await db.execute(`
+    INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES 
+        (1, 1, true, 100), 
+        (1, 2, false, 50);
+  `);
+});
+
+describe("GET /matches", () => {
+  it("Responds with a list of all matches", async () => {
+    const response = await request(app).get("/matches");
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual([
+      {
+        id: 1,
+        game_id: 1,
+        created_at: "2023-01-01T00:00:00.000Z",
+        game: { id: 1, name: "Game 1", image_url: "/example.jpg" },
+        players: [
+          {
+            id: 1,
+            name: "Joe",
+            points: 150,
+            image_url: "/example.jpg",
+            isWinner: true,
+            pointsGiven: 100,
+          },
+          {
+            id: 2,
+            name: "Sammy",
+            points: 150,
+            image_url: "/example.jpg",
+            isWinner: false,
+            pointsGiven: 50,
+          },
+        ],
+      },
+    ]);
+  });
+});
+
+describe("GET /matches/:id", () => {
+  it("Responds with a single matches", async () => {
+    const response = await request(app).get("/matches/1");
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      {
+        id: 1,
+        game_id: 1,
+        created_at: "2023-01-01T00:00:00.000Z",
+        game: { id: 1, name: "Game 1", image_url: "/example.jpg" },
+        players: [
+          {
+            id: 1,
+            name: "Joe",
+            points: 150,
+            image_url: "/example.jpg",
+            isWinner: true,
+            pointsGiven: 100,
+          },
+          {
+            id: 2,
+            name: "Sammy",
+            points: 150,
+            image_url: "/example.jpg",
+            isWinner: false,
+            pointsGiven: 50,
+          },
+        ],
+      },
+    );
+  });
 });
 
 describe("POST /matches", () => {
