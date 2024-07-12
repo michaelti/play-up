@@ -9,7 +9,8 @@
     "migrate": "node ./db/migration.js",
     "migrate:test": "NODE_ENV=test npm run migrate",
     "seed": "node ./db/seed.js",
-    "test": "vitest"
+    "test-watch": "vitest --no-file-parallelism",
+    "test": "vitest run --no-file-parallelism"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,6 @@
   },
   "devDependencies": {
     "supertest": "^7.0.0",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.2"
   }
 }
