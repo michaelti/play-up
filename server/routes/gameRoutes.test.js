@@ -4,9 +4,9 @@ import app from "../index.js";
 import db from "../db/connection.js";
 
 beforeEach(async () => {
-  await db.execute(`DELETE from games`);
+  await db.query(`DELETE from games`);
 
-  await db.execute(`
+  await db.query(`
     INSERT INTO games (id, name, image_url) VALUES
         (1, 'Game 1', '/example.jpg'),
         (2, 'Game 2', '/example.jpg'),
@@ -81,10 +81,10 @@ describe("POST /games", () => {
     };
 
     await request(app).post("/games").send(body);
-    const [databaseRows] = await db.execute(
+    const games = await db.query(
       "SELECT name, image_url FROM games"
     );
 
-    expect(databaseRows).toContainEqual(body);
+    expect(games.rows).toContainEqual(body);
   });
 });

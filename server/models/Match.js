@@ -1,36 +1,34 @@
 import db from "../db/connection.js";
-
 import { increasePlayerPoints } from "./Player.js";
 
 const retrieveAllMatches = async () => {
-  const [matches] = await db.execute(
+  const matches = await db.query(
     "SELECT * FROM matches ORDER BY created_at DESC"
   );
 
   // Get matches with their related data
   // This is not optimal, but is an approach that students might try
 
-  for (const match of matches) {
-    const [[matchGame]] = await db.execute("SELECT * FROM games WHERE id = ?", [
+  for (const match of matches.rows) {
+    const game = await db.query("SELECT * FROM games WHERE id = $1", [
       match.game_id,
     ]);
 
-    match.game = matchGame;
+    match.game = game.rows[0];
 
     match.players = [];
 
-    const [matchPlayers] = await db.execute(
-      "SELECT * FROM matches_players WHERE match_id = ?",
+    const matchPlayers = await db.query(
+      "SELECT * FROM matches_players WHERE match_id = $1",
       [match.id]
     );
 
-    for (const matchPlayer of matchPlayers) {
-      const [playerRows] = await db.execute(
-        "SELECT * FROM players WHERE id = ?",
-        [matchPlayer.player_id]
-      );
+    for (const matchPlayer of matchPlayers.rows) {
+      const players = await db.query("SELECT * FROM players WHERE id = $1", [
+        matchPlayer.player_id,
+      ]);
 
-      const player = playerRows[0];
+      const player = players.rows[0];
 
       match.players.push({
         ...player,
@@ -40,36 +38,31 @@ const retrieveAllMatches = async () => {
     }
   }
 
-  return matches;
+  return matches.rows;
 };
 
 const retrieveSingleMatch = async (id) => {
-  const [rows] = await db.execute("SELECT * FROM matches WHERE id = ?", [id]);
-  const match = rows[0];
+  const matches = await db.query("SELECT * FROM matches WHERE id = $1", [id]);
+  const match = matches.rows[0];
 
-  // Get related data
-  // This is not optimal, but is an approach that students might try
-
-  const [[matchGame]] = await db.execute("SELECT * FROM games WHERE id = ?", [
+  const matchGames = await db.query("SELECT * FROM games WHERE id = $1", [
     match.game_id,
   ]);
 
-  match.game = matchGame;
-
+  match.game = matchGames.rows[0];
   match.players = [];
 
-  const [matchPlayers] = await db.execute(
-    "SELECT * FROM matches_players WHERE match_id = ?",
+  const matchPlayers = await db.query(
+    "SELECT * FROM matches_players WHERE match_id = $1",
     [id]
   );
 
-  for (const matchPlayer of matchPlayers) {
-    const [playerRows] = await db.execute(
-      "SELECT * FROM players WHERE id = ?",
-      [matchPlayer.player_id]
-    );
+  for (const matchPlayer of matchPlayers.rows) {
+    const players = await db.query("SELECT * FROM players WHERE id = $1", [
+      matchPlayer.player_id,
+    ]);
 
-    const player = playerRows[0];
+    const player = players.rows[0];
 
     match.players.push({
       ...player,
@@ -82,19 +75,18 @@ const retrieveSingleMatch = async (id) => {
 };
 
 const saveNewMatch = async (match) => {
-  const [result] = await db.execute(
-    "INSERT INTO matches (game_id) VALUES (?)",
-    [match.game_id]
-  );
+  const result = await db.query("INSERT INTO matches (game_id) VALUES ($1) RETURNING id", [
+    match.game_id,
+  ]);
 
-  const newMatchId = result.insertId;
+  const newMatchId = result.rows[0].id;
 
   for (const playerId of match.playerIds) {
     const isWinner = playerId === match.winnerPlayerId;
     const points = isWinner ? 100 : 50;
 
-    await db.execute(
-      "INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES (?, ?, ?, ?)",
+    await db.query(
+      "INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES ($1, $2, $3, $4)",
       [newMatchId, playerId, isWinner, points]
     );
 
