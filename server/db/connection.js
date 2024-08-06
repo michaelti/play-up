@@ -20,7 +20,7 @@ const testDatabase = {
 
 const config = process.env.NODE_ENV === "test" ? testDatabase : database;
 
-const clinet = new Client(config);
-await clinet.connect();
+const client = new Client(config);
+await client.connect();
 
-export default clinet;
+export default client;
