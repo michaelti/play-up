@@ -8,8 +8,11 @@ const database = {
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  ssl: { rejectUnauthorized: false },
 };
+
+if (process.env.NODE_ENV === "production") {
+  database.ssl = { rejectUnauthorized: false };
+}
 
 const testDatabase = {
   database: process.env.DB_TEST_DATABASE,
