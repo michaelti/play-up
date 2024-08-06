@@ -1,11 +1,11 @@
 import db from "./connection.js";
 
-await db.execute(`DELETE from matches_players`);
-await db.execute(`DELETE from matches`);
-await db.execute(`DELETE from players`);
-await db.execute(`DELETE from games`);
+await db.query(`DELETE from matches_players`);
+await db.query(`DELETE from matches`);
+await db.query(`DELETE from players`);
+await db.query(`DELETE from games`);
 
-await db.execute(`
+await db.query(`
     INSERT INTO games (id, name, image_url) VALUES
         (1, 'Super Smash Bros. Ultimate', '/images/8eb517e8-dcb2-4464-8e9d-9be6050abf6a.jpg'),
         (2, 'Switch Sports', '/images/e88a2a08-4f27-4bf2-82b9-d47f6ed65256.jpg'),
@@ -14,7 +14,7 @@ await db.execute(`
         (5, 'Rocket League', '/images/d56694c6-2e07-44d9-868b-1fd6bb1150da.jpg');
 `);
 
-await db.execute(`
+await db.query(`
     INSERT INTO players (id, name, points, image_url) VALUES
         (1, 'Joe', 150, '/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg'),
         (2, 'Sammy', 150, '/images/23a2111d-a516-4d3d-9173-9799a47ae336.jpg'),
@@ -25,14 +25,14 @@ await db.execute(`
         (7, 'Donkey Kong', 0, NULL);
 `);
 
-await db.execute(`
+await db.query(`
     INSERT INTO matches (id, game_id, created_at) VALUES
         (1, 1, '2023-01-01 00:00:00'),
         (2, 2, '2023-01-02 00:00:00'),
         (3, 2, '2023-01-03 00:00:00');
 `);
 
-await db.execute(`
+await db.query(`
     INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES
         (1, 1, true, 100),
         (1, 2, false, 50),
