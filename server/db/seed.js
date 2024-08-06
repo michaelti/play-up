@@ -14,6 +14,11 @@ await db.query(`
         (5, 'Rocket League', '/images/d56694c6-2e07-44d9-868b-1fd6bb1150da.jpg');
 `);
 
+// Update the sequence so that any future records start at the correct id
+await db.query(`
+    SELECT setval('games_id_seq', 5);
+`);
+
 await db.query(`
     INSERT INTO players (id, name, points, image_url) VALUES
         (1, 'Joe', 150, '/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg'),
@@ -26,10 +31,18 @@ await db.query(`
 `);
 
 await db.query(`
+    SELECT setval('players_id_seq', 7);
+`);
+
+await db.query(`
     INSERT INTO matches (id, game_id, created_at) VALUES
         (1, 1, '2023-01-01 00:00:00'),
         (2, 2, '2023-01-02 00:00:00'),
         (3, 2, '2023-01-03 00:00:00');
+`);
+
+await db.query(`
+    SELECT setval('matches_id_seq', 3);
 `);
 
 await db.query(`
