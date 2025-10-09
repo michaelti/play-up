@@ -5,7 +5,7 @@ PostgreSQL schema for Play-Up game tracking application.
 ## Supabase Project
 
 **Project URL:** https://hbjzwcqrhlafknlvrvhz.supabase.co
-**Anon Key:** eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhianp3Y3FyaGxhZmtubHZydmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDcxNjMsImV4cCI6MjA3NTUyMzE2M30.ETyQTCwtbghiQWTLkS40mUhTqW9hghpSpFB2ZWeTp84
+**Anon Key:** Found in Supabase Dashboard → Project Settings → API (stored in `.env` files only)
 
 ---
 
@@ -100,21 +100,9 @@ INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUE
 
 ## Row Level Security (RLS)
 
-Enable RLS with permissive policies (restrict later as needed):
+**Current State:** RLS is currently disabled.
 
-```sql
--- Enable RLS
-ALTER TABLE games ENABLE ROW LEVEL SECURITY;
-ALTER TABLE players ENABLE ROW LEVEL SECURITY;
-ALTER TABLE matches ENABLE ROW LEVEL SECURITY;
-ALTER TABLE matches_players ENABLE ROW LEVEL SECURITY;
-
--- Allow all operations (you can restrict later)
-CREATE POLICY "Allow all on games" ON games FOR ALL USING (true);
-CREATE POLICY "Allow all on players" ON players FOR ALL USING (true);
-CREATE POLICY "Allow all on matches" ON matches FOR ALL USING (true);
-CREATE POLICY "Allow all on matches_players" ON matches_players FOR ALL USING (true);
-```
+For production deployments with public access, see the "Future Optimizations" section below for secure policy implementations.
 
 ---
 
