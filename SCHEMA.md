@@ -1,11 +1,9 @@
 # Database Schema
 
-PostgreSQL schema for Play-Up game tracking application.
-
 ## Supabase Project
 
-**Project URL:** https://hbjzwcqrhlafknlvrvhz.supabase.co
-**Anon Key:** Found in Supabase Dashboard → Project Settings → API (stored in `.env` files only)
+**Project URL:** Stored in `.env` as `VITE_SUPABASE_URL`
+**Anon Key:** Found in Supabase Dashboard → Project Settings → API (stored in `.env`)
 
 ---
 
@@ -14,20 +12,17 @@ PostgreSQL schema for Play-Up game tracking application.
 Run in Supabase SQL Editor to create/reset tables:
 
 ```sql
--- Drop tables if they exist (for clean migration)
 DROP TABLE IF EXISTS matches_players CASCADE;
 DROP TABLE IF EXISTS matches CASCADE;
 DROP TABLE IF EXISTS players CASCADE;
 DROP TABLE IF EXISTS games CASCADE;
 
--- Create games table
 CREATE TABLE games (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     image_url VARCHAR(255)
 );
 
--- Create players table
 CREATE TABLE players (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -35,7 +30,6 @@ CREATE TABLE players (
     image_url VARCHAR(255)
 );
 
--- Create matches table
 CREATE TABLE matches (
     id SERIAL PRIMARY KEY,
     game_id INT NOT NULL,
@@ -43,7 +37,6 @@ CREATE TABLE matches (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create matches_players junction table
 CREATE TABLE matches_players (
     match_id INT NOT NULL,
     FOREIGN KEY (match_id) REFERENCES matches(id),
@@ -61,7 +54,6 @@ CREATE TABLE matches_players (
 Optional seed data for development/testing:
 
 ```sql
--- Insert games
 INSERT INTO games (name, image_url) VALUES
     ('Super Smash Bros. Ultimate', '/images/8eb517e8-dcb2-4464-8e9d-9be6050abf6a.jpg'),
     ('Switch Sports', '/images/e88a2a08-4f27-4bf2-82b9-d47f6ed65256.jpg'),
@@ -69,7 +61,6 @@ INSERT INTO games (name, image_url) VALUES
     ('Mario Kart 8 Deluxe', '/images/ebefaeb6-9749-467e-89ea-bbe1d4829141.jpg'),
     ('Rocket League', '/images/d56694c6-2e07-44d9-868b-1fd6bb1150da.jpg');
 
--- Insert players
 INSERT INTO players (name, points, image_url) VALUES
     ('Joe', 150, '/images/876d9d75-c7a7-488c-ad52-665e1ff72c02.jpg'),
     ('Sammy', 150, '/images/23a2111d-a516-4d3d-9173-9799a47ae336.jpg'),
@@ -79,13 +70,11 @@ INSERT INTO players (name, points, image_url) VALUES
     ('Matt', 0, NULL),
     ('Donkey Kong', 0, NULL);
 
--- Insert sample matches
 INSERT INTO matches (game_id, created_at) VALUES
     (1, '2023-01-01 00:00:00'),
     (2, '2023-01-02 00:00:00'),
     (2, '2023-01-03 00:00:00');
 
--- Insert match participants
 INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUES
     (1, 1, true, 100),
     (1, 2, false, 50),
@@ -94,26 +83,6 @@ INSERT INTO matches_players (match_id, player_id, is_winner, points_given) VALUE
     (2, 3, true, 100),
     (3, 2, true, 100),
     (3, 3, false, 50);
-```
-
----
-
-## Row Level Security (RLS)
-
-**Current State:** RLS is currently disabled.
-
-For production deployments with public access, see the "Future Optimizations" section below for secure policy implementations.
-
----
-
-## Performance Indexes
-
-Add indexes for common queries:
-
-```sql
-CREATE INDEX idx_matches_created_at ON matches(created_at DESC);
-CREATE INDEX idx_players_points ON players(points DESC);
-CREATE INDEX idx_matches_players_match ON matches_players(match_id);
 ```
 
 ---
@@ -306,12 +275,3 @@ For this app, start with:
 1. **Read-only public access** for games, players, matches
 2. **Server-side match creation** using service role key (move `createMatch` to an API route)
 3. **Add Supabase Auth later** if you need user accounts
-
----
-
-## Notes
-
-- **Points Logic:** Winners get 100 points, participants get 50 points
-- **Image URLs:** Stored as relative paths (`/images/...`) served from `client/public/images/`
-- **Match Creation:** Handled client-side in `client/src/lib/createMatch.js`
-- **Auto-increment:** Don't specify IDs in INSERT statements - let PostgreSQL handle sequence generation
