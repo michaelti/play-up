@@ -1,4 +1,4 @@
-import useAxiosPost from "../../hooks/useAxiosPost";
+import { createMatch } from "../../lib/createMatch";
 import "./NewMatchForm.scss";
 import { useState } from "react";
 import PlayerPicker from "../PlayerPicker/PlayerPicker";
@@ -6,24 +6,29 @@ import WinnerPicker from "../WinnerPicker/WinnerPicker";
 import GamePicker from "../GamePicker/GamePicker";
 
 export default function NewMatchForm({ onSave }) {
-  const [_newMatch, _newMatchLoading, _newMatchError, postMatchFn] =
-    useAxiosPost(`/matches`);
   const [players, setPlayers] = useState([]);
   const [isDoneSelectingPlayers, setIsDoneSelectingPlayers] = useState(false);
   const [winner, setWinner] = useState(null);
   const [game, setGame] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setIsSubmitting(true);
 
-    await postMatchFn({
+    const { error: createError } = await createMatch({
       game_id: game.id,
       playerIds: players.map((player) => player.id),
       winnerPlayerId: winner.id,
     });
+
+    if (createError) {
+      setError(createError);
+      setIsSubmitting(false);
+      return;
+    }
 
     await onSave();
 
@@ -32,6 +37,7 @@ export default function NewMatchForm({ onSave }) {
     setIsDoneSelectingPlayers(false);
     setGame(null);
     setIsSubmitting(false);
+    setError(null);
   };
 
   let message = "Pick a game";

@@ -10,7 +10,7 @@ export default function MatchCard({ timestamp, players, game }) {
       <header className="match-card__header">
         <img
           className="match-card__game-icon"
-          src={import.meta.env.VITE_BACKEND_URL + game.image_url}
+          src={game.image_url}
           alt=""
         />
         <div>
@@ -22,9 +22,8 @@ export default function MatchCard({ timestamp, players, game }) {
         {players
           .toSorted((a, b) => b.isWinner - a.isWinner)
           .map((player) => {
-            const image = player.image_url
-              ? import.meta.env.VITE_BACKEND_URL + player.image_url
-              : `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
+            const image = player.image_url ||
+              `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
 
             return (
               <MatchPlayer

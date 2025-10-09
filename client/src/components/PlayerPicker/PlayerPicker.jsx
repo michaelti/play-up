@@ -1,9 +1,9 @@
 import "./PlayerPicker.scss";
-import useAxios from "../../hooks/useAxios";
+import useSupabaseQuery from "../../hooks/useSupabaseQuery";
 import { getPlayerImage } from "../../utils/getImage";
 
 export default function PlayerPicker({ onChange, value }) {
-  const [players, loading, error] = useAxios("/players");
+  const [players, loading, error] = useSupabaseQuery('players');
 
   const handleChange = (event, player) => {
     if (event.target.checked) {
