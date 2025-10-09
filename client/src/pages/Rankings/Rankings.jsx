@@ -1,9 +1,9 @@
 import "./Rankings.scss";
-import useAxios from "../../hooks/useAxios";
+import useSupabaseQuery from "../../hooks/useSupabaseQuery";
 import RankCard from "../../components/RankCard/RankCard";
 
 export default function Rankings() {
-  const [players, loading, error] = useAxios("/players");
+  const [players, loading, error] = useSupabaseQuery('players');
 
   if (loading) {
     return <></>;
@@ -20,9 +20,8 @@ export default function Rankings() {
           {players
             .sort((a, b) => b.points - a.points)
             .map((player) => {
-              const image = player.image_url
-                ? import.meta.env.VITE_BACKEND_URL + player.image_url
-                : `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
+              const image = player.image_url ||
+                `https://api.dicebear.com/9.x/initials/svg?seed=${player.name}`;
 
               return (
                 <RankCard

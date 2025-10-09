@@ -1,9 +1,9 @@
 import "./GamePicker.scss";
-import useAxios from "../../hooks/useAxios";
+import useSupabaseQuery from "../../hooks/useSupabaseQuery";
 import { useState, Children } from "react";
 
 export default function GamePicker({ onChange, value, children }) {
-  const [games, loading, error] = useAxios("/games");
+  const [games, loading, error] = useSupabaseQuery('games');
   const [topOfStack, setTopOfStack] = useState(0);
 
   const handleChange = (game, i) => {
@@ -49,7 +49,7 @@ export default function GamePicker({ onChange, value, children }) {
           >
             <img
               className="game-picker-item__image"
-              src={import.meta.env.VITE_BACKEND_URL + game.image_url}
+              src={game.image_url}
               alt={game.name}
               title={game.name}
             />
